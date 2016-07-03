@@ -1,7 +1,7 @@
 /*
 	Напишите функцию, которая принимает 1 аргумент и возварщает его тип
 */
-function getDataType (variable) {
+function getDataType(variable) {
 	return typeof(variable);
 }
 
@@ -12,12 +12,12 @@ function getDataType (variable) {
 	0 если равны только значения
 	и -1 в другом случае
 */
-function compareByType (a, b) {
-	if(a === b){
+function compareByType(a, b) {
+	if (a === b) {
 		return 1;
-	}else if(a == b){
+	} else if (a == b) {
 		return 0;
-	}else{
+	} else {
 		return -1;
 	}
 }
@@ -29,10 +29,10 @@ function compareByType (a, b) {
 	и возврвщвет результат,
 	в любом другом случае возврвщвет -1
 */
-function increase (value) {
-	if(typeof(value) == 'number'){
+function increase(value) {
+	if (typeof(value) == 'number') {
 		return value + 1;
-	}else{
+	} else {
 		return -1;
 	}
 }
@@ -43,31 +43,21 @@ function increase (value) {
 	и возвращает строку ввиде элементов массива c разделителями если разделитель задан
 	или строку разделенную "-" если не задан
 */
-function join (array, separator) {
-	var string = '';
-	var sep;
-	if(separator != ''){
-		sep = separator;
-	}else{
-		sep = '-';
+function join(array, separator) {
+	var str;
+	if (separator == '') {
+		separator = '-';
 	}
- 	for(var i=0; i < array.length; i++){
-		if (array[i] != null) {
-			string += array[i];
-		}
+	str = array.join(separator);
 
-		if(i != array.length -1){
-			string += sep;
-		}
-	}
-	return string;
+	return str;
 }
 
 /*
 	Напишите функцию, которая принимает 2 массива,
 	и возвращает один состоящий из элементов перового и второго (последовательно сначала первый потом второй)
 */
-function glue (arrA, arrB) {
+function glue(arrA, arrB) {
 	var arrC = arrA.concat(arrB);
 	return arrC;
 }
@@ -77,17 +67,10 @@ function glue (arrA, arrB) {
 	Напишите функцию, которая принимает 1 массив,
 	и возвращает другой массив отсортированный от большего к меньшему
 */
-function order (arr) {
-	var bubble;
-	for(var i=0; i<arr.length; i++){
-		for(var j=0; j<arr.length; j++){
-			if(arr[j] < arr[j+1]){
-				bubble = arr[j];
-				arr[j] = arr[j+1];
-				arr[j+1] = bubble;
-			}
-		}
-	}
+function order(arr) {
+	arr.sort(function (a, b) {
+		return a > b
+	}).reverse();
 	return arr;
 }
 
@@ -96,10 +79,10 @@ function order (arr) {
 	Напишите функцию, которая принимает 1 массив,
 	и возвращает другой без чисел которые меньше 0
 */
-function removeNegative (arr) {
+function removeNegative(arr) {
 	var newArr = [];
- 	for(var i=0; i< arr.length;i++ ){
-		if(arr[i] >= 0){
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] >= 0) {
 			newArr.push(arr[i]);
 		}
 	}
@@ -111,7 +94,7 @@ function removeNegative (arr) {
 	Напишите функцию, которая принимает 1 аргумент (строку),
 	и возвращает массив из елементов строки разделенных по пробелу ' '
 */
-function stringToArray (str) {
+function stringToArray(str) {
 	return str.split(' ');
 }
 
@@ -121,7 +104,7 @@ function stringToArray (str) {
 	и возвращает часть этой строки до первой запятой
 */
 function getStringPart(str) {
-	if(str != null && str != ""){
+	if (str != null && str != "") {
 		var arr = str.split(',');
 		return arr[0]
 	}
