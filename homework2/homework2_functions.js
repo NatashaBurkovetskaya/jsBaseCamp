@@ -71,6 +71,7 @@ function toFindLongestWord(str) {
 
 
 //7. Write a function that can print entity details based on next model:
+//Expected output: "%NAME%(%TYPE%) - %AGE%."
 var sameInf = {
     name: 'Natasha',
     type: 'type',
@@ -94,11 +95,13 @@ var sameInf1 = {
 
 function showSameInf1(sameInf1) {
     return '%' + this.name + '%(%' + this.type + '%)%' + this.age + '%';
-}
 
-console.log(showSameInf1.call(sameInf1));
-console.log(showSameInf1.apply(sameInf1, ['name', 'type', 'age']));
-//console.log(showSameInf1.bind(sameInf1));
+}
+//var wrapper = showSameInf1.bind(sameInf1);
+//console.log(wrapper());
+
+//console.log(showSameInf1.call(sameInf1));
+//console.log(showSameInf1.apply(sameInf1, ['name', 'type', 'age']));
 
 //Home Task
 
@@ -116,9 +119,9 @@ function extractCharacters(str) {
     return Object.keys(obj);
 }
 
-console.log(extractCharacters('abcd'));
-console.log(extractCharacters('aaaabc'));
-console.log(extractCharacters('Hello, world'));
+//console.log(extractCharacters('abcd'));
+//console.log(extractCharacters('aaaabc'));
+//console.log(extractCharacters('Hello, world'));
 
 
 //10. 2. ???????? ???????, ??????? ????? ?????????? ????? ???????, ? ??????? ??????? ????? ????? ???????? ?
@@ -131,7 +134,7 @@ function createLogger(prefix) {
 }
 var myLogger = createLogger('My Logger');
 
-console.log(myLogger('some data'));
+//console.log(myLogger('some data'));
 
 
 
