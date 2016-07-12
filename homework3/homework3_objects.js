@@ -30,26 +30,32 @@ function Obj(name) {
     this.name = name;
     this.played = Math.round(Math.random() * (10000));
 }
-var firstSong = new Obj('James Vincent McMorrow - Wicked Game');
-var secondSong = new Obj('Kasabian – Fire');
-var thirdSong = new Obj('U2 – City of Blinding Lights');
-var fourthSong = new Obj('Reamonn – Weep');
-var fifthSong = new Obj('Ludovico Einaudi – Fly');
+var firstSong = new Obj('James Vincent McMorrow - Wicked Game'),
+    secondSong = new Obj('Kasabian – Fire'),
+    thirdSong = new Obj('U2 – City of Blinding Lights'),
+    fourthSong = new Obj('Reamonn – Weep'),
+    fifthSong = new Obj('Ludovico Einaudi – Fly');
 
-var musicSet = new Set();
-musicSet.add(firstSong);
-musicSet.add(secondSong);
-musicSet.add(thirdSong);
-musicSet.add(fourthSong);
-musicSet.add(fifthSong);
+    var musicSet = new Set();
+    musicSet.add(firstSong);
+    musicSet.add(secondSong);
+    musicSet.add(thirdSong);
+    musicSet.add(fourthSong);
+    musicSet.add(fifthSong);
 
-function showSong(musicSet) {
+function favoriteSong(musicSet) {
+    var maxplayed = 0;
+    var value1 = {};
     musicSet.forEach(function (value) {
-        console.log(value);
+        if (value.played > maxplayed) {
+            maxplayed = value.played;
+            value1 = value;
+        }
     });
+    return value1;
 }
 
-showSong(musicSet);
+console.log(favoriteSong(musicSet));
 
 //3.
 var Calculator = function () {
