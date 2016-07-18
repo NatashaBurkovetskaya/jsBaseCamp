@@ -10,18 +10,19 @@ function Obj2(name, surName, age) {
     this.surName = surName;
     this.age = age;
 }
-var anotherObj2 = new Obj2('Natasha', 'Burkovetskaya', 20);
+var anotherObj2 = new Obj2('Natasha', 'Burkovetskaya', 23);
 
 
 function compareObjects(obj1, obj2, value) {
-    if (obj1.age > obj2.age) {
-        console.log(obj1.name);
-    } else if (obj1.age < obj2.age) {
-        console.log(obj2.name);
-    } else {
-        console.log("Objects are equal");
-    }
+        if (obj1[value] > obj2[value]) {
+            console.log(obj1.name);
+        } else if (obj1[value] < obj2[value]) {
+            console.log(obj2.name);
+        } else {
+            console.log("Objects are equal");
+        }
 }
+
 compareObjects(obj1, anotherObj2, 'age');
 
 
