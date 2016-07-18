@@ -5,6 +5,7 @@
 //3.Add a new method to the prototype called `getPerimeter`.
 //Test your implementation with this code:
 
+//1.
 function Shape(type) {
     this.type = type;
     this.getType = function () {
@@ -18,7 +19,7 @@ function Triangle(a, b, c) {
     this.c = c;
 }
 
-Triangle.prototype = new Shape();
+Triangle.prototype = Object.create(Shape.prototype);
 
 delete Triangle.prototype.type;
 
@@ -35,4 +36,39 @@ console.log(t.getPerimeter());
 console.log(t.getType());
 
 
+
+//2.
+function add () {
+    var total = 0;
+    var args = Array.prototype.slice.call(arguments, 0);
+    for (var i=0; i<args.length; i++) {
+        total += arguments[i];
+    }
+    return total;
+}
+
+function curryFunction(orig_func) {
+    var ap = Array.prototype;
+    var args = arguments;
+
+    return function() {
+        function fn () {
+            if (arguments.length != 0) {
+                ap.push.apply(fn.args, arguments);
+                return fn;
+            } else {
+                return orig_func.apply(this, fn.args);
+            }
+        }
+        fn.args = ap.slice.call( args, 1 );
+        return fn.apply( this, arguments );
+    };
+}
+
+var f = curryFunction(add);
+var a = f(3)(4)(3)(9)(0);;
+var result = a();
+
+
+console.log(result);
 
