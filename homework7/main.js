@@ -1,59 +1,64 @@
-//function sum(a, b){
-//    return new Promise(function(resolve, reject){
-//        setTimeout(function(){
-//            resolve(a + b);
-//        }, 1000);
-//    });
-//}
-//
-//var t = sum(3, 9);
-//
-//t.then(function(result){
-//    console.log(result);
-//    return new Promise(function(resolve, reject){
-//        console.log("jjjj");
-//    })
-//})
-//    .then(function(result){
-//        console.log(result);
-//    });
-
-window.onload = function(){
-    var prevButton = document.getElementById('prevButton'),
-        nextButton = document.getElementById('nextButton'),
-        link = 'http://swapi.co/api/people/',
-        numberId = 1,
-        inf = ['name', 'height', 'mass', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'gender'],
-        infAboutActor = [];
-
-nextButton.addEventListener('click', clickOnNextButton, false);
-prevButton.addEventListener('click', clickOnPrevButton, false);
-
-
+function showPersons(numberId) {
+    var link = 'http://swapi.co/api/people/';
 
     fetch(link + numberId)
-        .then(function(response){
-            if(response.status <= 200){
-                response.json().then(function(actor){
-                    infAboutActor = document.getElementById('aboutActor').children;
+        .then(function (response) {
+            if (response.status <= 200) {
+                response.json().then(function (actor) {
+                    var name = document.querySelector('#aboutActor .name > span');
+                    name.innerHTML = actor['name'];
+                    var height = document.querySelector('#aboutActor .height > span');
+                    height.innerHTML = actor['height'];
+                    var mass = document.querySelector('#aboutActor .mass > span');
+                    mass.innerHTML = actor['mass'];
+                    var hair_color = document.querySelector('#aboutActor .hair_color > span');
+                    hair_color.innerHTML = actor['hair_color'];
+                    var skin_color = document.querySelector('#aboutActor .skin_color > span');
+                    skin_color.innerHTML = actor['skin_color'];
+                    var eye_color = document.querySelector('#aboutActor .eye_color > span');
+                    eye_color.innerHTML = actor['eye_color'];
+                    var birth_year = document.querySelector('#aboutActor .birth_year > span');
+                    birth_year.innerHTML = actor['birth_year'];
+                    var gender = document.querySelector('#aboutActor .gender > span');
+                    gender.innerHTML = actor['gender'];
 
-                    for(var i = 0; i <= infAboutActor.length; i++){
-                        infAboutActor[i].innerHTML = actor[inf[i]];
-                    }
-
+                    var films = document.querySelectorAll('#films .episode > span');
+                    films.forEach(function (span, i) {
+                        fetch(actor.films[i]).then(function (response) {
+                            response.json().then(function (json) {
+                                span.innerHTML = json.title;
+                            });
+                        });
+                    });
                 });
             }
-
         })
-        .catch(function(error){
+        .catch(function (error) {
 
         });
-function clickOnNextButton(){
-    numberId++;
-
-}
-function clickOnPrevButton(){
-    numberId--;
 }
 
+window.onload = function () {
+    var prevButton = document.getElementById('prevButton'),
+        nextButton = document.getElementById('nextButton'),
+        numberId = 1;
+
+    nextButton.addEventListener('click', clickOnNextButton, false);
+    prevButton.addEventListener('click', clickOnPrevButton, false);
+
+    showPersons(numberId);
+
+    function clickOnNextButton() {
+        if (numberId <= 87) {
+            numberId++;
+            showPersons(numberId);
+        }
+    }
+
+    function clickOnPrevButton() {
+        if (numberId >= 1) {
+            numberId--;
+            showPersons(numberId);
+        }
+    }
 };
